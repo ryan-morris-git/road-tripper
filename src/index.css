@@ -1,0 +1,81 @@
+:root {
+  --sky-blue-light: #8ecae6;
+  --blue-green: #219ebc;
+  --deep-space-blue: #023047;
+  --amber-flame: #ffb703;
+  --princeton-orange: #fb8500;
+
+  --bg: var(--deep-space-blue);
+  --surface: color-mix(in srgb, var(--deep-space-blue) 82%, var(--blue-green));
+  --text: var(--sky-blue-light);
+  --text-h: var(--sky-blue-light);
+  --border: color-mix(in srgb, var(--blue-green) 45%, var(--deep-space-blue));
+  --code-bg: color-mix(in srgb, var(--deep-space-blue) 70%, var(--blue-green));
+  --accent: var(--blue-green);
+  --accent-bg: color-mix(in srgb, var(--blue-green) 22%, var(--deep-space-blue));
+  --danger: var(--princeton-orange);
+  --danger-bg: color-mix(in srgb, var(--princeton-orange) 16%, var(--deep-space-blue));
+  --shadow:
+    rgba(2, 48, 71, 0.55) 0 10px 18px -3px, rgba(2, 48, 71, 0.3) 0 4px 8px -2px;
+
+  --sans: Cantarell, sans-serif;
+  --heading: Cantarell, sans-serif;
+  --mono: Cantarell, sans-serif;
+
+  font: 16px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--text-h);
+  background: var(--code-bg);
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--blue-green);
+  outline-offset: 2px;
+}
