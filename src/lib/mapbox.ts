@@ -82,6 +82,7 @@ export async function searchPlaces(
   const params = new URLSearchParams({
     q: query,
     limit: '5',
+    language: 'en',
     access_token: token,
   })
 
