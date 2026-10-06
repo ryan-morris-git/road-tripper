@@ -358,24 +358,6 @@
   cursor: pointer;
 }
 
-.setup-screen {
-  display: grid;
-  place-items: center;
-  min-height: 100svh;
-  padding: 24px;
-}
-
-.setup-card {
-  max-width: 460px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.setup-card h1 {
-  font-size: 2rem;
-}
-
 @media (max-width: 899px) {
   .app {
     display: block;
