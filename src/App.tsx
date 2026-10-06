@@ -20,6 +20,7 @@ function App() {
           <TokenField value={input} onChange={update} />
           <SearchBox
             token={token}
+            stopCount={itinerary.stops.length ?? 0}
             proximityRef={proximityRef}
             onSelect={itinerary.addStop}
           />

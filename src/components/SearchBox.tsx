@@ -12,11 +12,17 @@ import type { MapCenter, PlaceSuggestion } from "../types";
 
 type SearchBoxProps = {
   token: string | undefined;
+  stopCount: number;
   proximityRef: RefObject<MapCenter | undefined>;
   onSelect: (stop: NewStop) => void;
 };
 
-export function SearchBox({ token, proximityRef, onSelect }: SearchBoxProps) {
+export function SearchBox({
+  token,
+  stopCount,
+  proximityRef,
+  onSelect,
+}: SearchBoxProps) {
   const listId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
@@ -33,6 +39,12 @@ export function SearchBox({ token, proximityRef, onSelect }: SearchBoxProps) {
   const visibleStatus = canSearch ? status : "idle";
   const listOpen =
     isOpen && canSearch && (suggestions.length > 0 || visibleStatus !== "idle");
+
+  const placeholderText = token
+    ? stopCount === 0
+      ? "Search for the starting point"
+      : "Search for the next stop"
+    : "Paste a Mapbox token to search";
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
@@ -142,9 +154,7 @@ export function SearchBox({ token, proximityRef, onSelect }: SearchBoxProps) {
         role="combobox"
         autoComplete="off"
         spellCheck={false}
-        placeholder={
-          token ? "Search for the next stop" : "Paste a Mapbox token to search"
-        }
+        placeholder={placeholderText}
         value={query}
         disabled={!token}
         aria-expanded={listOpen}

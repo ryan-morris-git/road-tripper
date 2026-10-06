@@ -87,10 +87,6 @@ export function TokenField({ value, onChange }: TokenFieldProps) {
           <p>
             Paste it here. Do not use a secret token (<code>sk.</code>).
           </p>
-          <p>
-            In the Mapbox dashboard you can restrict that public token to your
-            site URL.
-          </p>
         </div>
       </div>
     </div>
