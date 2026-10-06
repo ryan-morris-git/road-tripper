@@ -4,5 +4,6 @@ import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/road-tripper/",
   plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
 });
