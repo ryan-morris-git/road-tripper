@@ -11,8 +11,16 @@
   --text-h: var(--sky-blue-light);
   --border: color-mix(in srgb, var(--blue-green) 45%, var(--deep-space-blue));
   --code-bg: color-mix(in srgb, var(--deep-space-blue) 70%, var(--blue-green));
-  --accent-bg: color-mix(in srgb, var(--blue-green) 22%, var(--deep-space-blue));
-  --danger-bg: color-mix(in srgb, var(--princeton-orange) 16%, var(--deep-space-blue));
+  --accent-bg: color-mix(
+    in srgb,
+    var(--blue-green) 22%,
+    var(--deep-space-blue)
+  );
+  --danger-bg: color-mix(
+    in srgb,
+    var(--princeton-orange) 16%,
+    var(--deep-space-blue)
+  );
   --shadow:
     rgba(2, 48, 71, 0.55) 0 10px 18px -3px, rgba(2, 48, 71, 0.3) 0 4px 8px -2px;
 

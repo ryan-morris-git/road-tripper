@@ -1,21 +1,21 @@
-import type { PersistedItinerary, Stop } from '../types'
+import type { PersistedItinerary, Stop } from "../types";
 
-export const ITINERARY_STORAGE_KEY = 'road-tripper:itinerary'
+export const ITINERARY_STORAGE_KEY = "road-tripper:itinerary";
 
 function isFiniteNumber(value: unknown): value is number {
-  return typeof value === 'number' && Number.isFinite(value)
+  return typeof value === "number" && Number.isFinite(value);
 }
 
 function isStop(value: unknown): value is Stop {
-  if (value === null || typeof value !== 'object') {
-    return false
+  if (value === null || typeof value !== "object") {
+    return false;
   }
 
-  const stop = value as Partial<Stop>
+  const stop = value as Partial<Stop>;
   return (
-    typeof stop.id === 'string' &&
+    typeof stop.id === "string" &&
     stop.id.length > 0 &&
-    typeof stop.name === 'string' &&
+    typeof stop.name === "string" &&
     stop.name.length > 0 &&
     isFiniteNumber(stop.lng) &&
     isFiniteNumber(stop.lat) &&
@@ -23,51 +23,60 @@ function isStop(value: unknown): value is Stop {
     stop.lng <= 180 &&
     stop.lat >= -90 &&
     stop.lat <= 90
-  )
+  );
 }
 
-export function isPersistedItinerary(value: unknown): value is PersistedItinerary {
-  if (value === null || typeof value !== 'object') {
-    return false
+export function isPersistedItinerary(
+  value: unknown,
+): value is PersistedItinerary {
+  if (value === null || typeof value !== "object") {
+    return false;
   }
 
-  const payload = value as Partial<PersistedItinerary>
-  return payload.version === 1 && Array.isArray(payload.stops) && payload.stops.every(isStop)
+  const payload = value as Partial<PersistedItinerary>;
+  return (
+    payload.version === 1 &&
+    Array.isArray(payload.stops) &&
+    payload.stops.every(isStop)
+  );
 }
 
 export function toItineraryPayload(stops: Stop[]): PersistedItinerary {
-  return { version: 1, stops }
+  return { version: 1, stops };
 }
 
 export function parseItineraryJson(text: string): Stop[] | undefined {
   try {
-    const parsed: unknown = JSON.parse(text)
+    const parsed: unknown = JSON.parse(text);
     if (!isPersistedItinerary(parsed)) {
-      return undefined
+      return undefined;
     }
-    return parsed.stops
+    return parsed.stops;
   } catch {
-    return undefined
+    return undefined;
   }
 }
 
 export function readItinerary(): Stop[] {
   try {
-    const raw = localStorage.getItem(ITINERARY_STORAGE_KEY)
+    const raw = localStorage.getItem(ITINERARY_STORAGE_KEY);
     if (!raw) {
-      return []
+      return [];
     }
 
-    return parseItineraryJson(raw) ?? []
+    return parseItineraryJson(raw) ?? [];
   } catch {
-    return []
+    return [];
   }
 }
 
 export function writeItinerary(stops: Stop[]): void {
-  localStorage.setItem(ITINERARY_STORAGE_KEY, JSON.stringify(toItineraryPayload(stops)))
+  localStorage.setItem(
+    ITINERARY_STORAGE_KEY,
+    JSON.stringify(toItineraryPayload(stops)),
+  );
 }
 
 export function clearItineraryStorage(): void {
-  localStorage.removeItem(ITINERARY_STORAGE_KEY)
+  localStorage.removeItem(ITINERARY_STORAGE_KEY);
 }
