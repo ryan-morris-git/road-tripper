@@ -131,7 +131,22 @@ export function TripMap({
   const mapRef = useRef<MapRef>(null);
   const lastFitKey = useRef("");
 
-  const fitKey = `${stops.map((stop) => stop.id).join(">")}${routeGeometry ? "|r" : ""}`;
+  const routeKey = routeGeometry
+  ? `${routeGeometry.coordinates.length}:${routeGeometry.coordinates[0]?.join(",")}:${routeGeometry.coordinates.at(-1)?.join(",")}`
+  : "";
+  
+  const fitKey = `${stops.map((stop) => stop.id).join(">")}|${routeKey}`;
+  
+  const bounds = new LngLatBounds();
+  if (routeGeometry) {
+    for (const coordinate of routeGeometry.coordinates) {
+      bounds.extend(coordinate);
+    }
+  }
+  for (const stop of stops) {
+    bounds.extend([stop.lng, stop.lat]);
+  }
+
 
   const routeData = useMemo(
     () =>
